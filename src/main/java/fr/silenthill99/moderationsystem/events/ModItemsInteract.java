@@ -2,7 +2,6 @@ package fr.silenthill99.moderationsystem.events;
 
 import fr.silenthill99.moderationsystem.inventory.InventoryManager;
 import fr.silenthill99.moderationsystem.inventory.InventoryType;
-import fr.silenthill99.moderationsystem.inventory.holder.InventoryHolder;
 import fr.silenthill99.moderationsystem.managers.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -14,9 +13,9 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.PluginManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -76,10 +75,14 @@ public class ModItemsInteract implements Listener
     @EventHandler
     public void onInteract(PlayerInteractEvent event)
     {
+        HashMap<Player, Long> timer = new HashMap<>();
         Player player = event.getPlayer();
+        long time = System.currentTimeMillis();
+        timer.put(player, System.currentTimeMillis() + 10);
+        if (time < timer.get(player)) return;
+
         if (!PlayerManager.isInModerationMod(player)) return;
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK && event.getAction() != Action.RIGHT_CLICK_AIR) return;
-
         ItemStack current = player.getInventory().getItemInMainHand();
 
         switch (current.getType())
