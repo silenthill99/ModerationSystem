@@ -78,11 +78,12 @@ public class ModItemsInteract implements Listener
         HashMap<Player, Long> timer = new HashMap<>();
         Player player = event.getPlayer();
         long time = System.currentTimeMillis();
-        timer.put(player, System.currentTimeMillis() + 10);
         if (time < timer.get(player)) return;
+        timer.put(player, System.currentTimeMillis() + 10);
 
+        Action action = event.getAction();
         if (!PlayerManager.isInModerationMod(player)) return;
-        if (event.getAction() != Action.RIGHT_CLICK_BLOCK && event.getAction() != Action.RIGHT_CLICK_AIR) return;
+        if (action != Action.RIGHT_CLICK_BLOCK && action != Action.RIGHT_CLICK_AIR) return;
         ItemStack current = player.getInventory().getItemInMainHand();
 
         switch (current.getType())
