@@ -78,8 +78,7 @@ public class ModItemsInteract implements Listener
         HashMap<Player, Long> timer = new HashMap<>();
         Player player = event.getPlayer();
         long time = System.currentTimeMillis();
-        if (time < timer.get(player)) return;
-        timer.put(player, System.currentTimeMillis() + 10);
+
 
         Action action = event.getAction();
         if (!PlayerManager.isInModerationMod(player)) return;
@@ -104,6 +103,8 @@ public class ModItemsInteract implements Listener
                 Player target = list.get(new Random().nextInt(list.size()));
                 player.teleport(target.getLocation());
                 player.sendMessage(ChatColor.GREEN + "Vous avez été téléporté à " + ChatColor.YELLOW + target.getName());
+                if (time < timer.get(player)) return;
+                timer.put(player, System.currentTimeMillis() + 1000);
                 break;
             }
             /**
