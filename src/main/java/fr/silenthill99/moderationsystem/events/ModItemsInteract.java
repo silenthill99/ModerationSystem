@@ -1,7 +1,5 @@
 package fr.silenthill99.moderationsystem.events;
 
-import fr.silenthill99.moderationsystem.inventory.InventoryManager;
-import fr.silenthill99.moderationsystem.inventory.InventoryType;
 import fr.silenthill99.moderationsystem.managers.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,7 +13,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -33,14 +30,6 @@ public class ModItemsInteract implements Listener
 
         switch (current.getType())
         {
-            /**
-             * Voir l'inventaire
-             */
-            case PAPER:
-            {
-                InventoryManager.openInventory(player, InventoryType.INVENTORY, target);
-                break;
-            }
             case BOOK:
             {
                 /**
@@ -75,15 +64,10 @@ public class ModItemsInteract implements Listener
     @EventHandler
     public void onInteract(PlayerInteractEvent event)
     {
-        HashMap<Player, Long> timer = new HashMap<>();
         Player player = event.getPlayer();
-        long time = System.currentTimeMillis();
-
-
         Action action = event.getAction();
-        if (!PlayerManager.isInModerationMod(player)) return;
-        if (action != Action.RIGHT_CLICK_BLOCK && action != Action.RIGHT_CLICK_AIR) return;
         ItemStack current = player.getInventory().getItemInMainHand();
+        if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK) return;
 
         switch (current.getType())
         {
@@ -92,6 +76,7 @@ public class ModItemsInteract implements Listener
              */
             case ARROW:
             {
+
                 List<Player> list = new ArrayList<>(Bukkit.getOnlinePlayers());
                 list.remove(player);
                 if (list.size() == 0)
@@ -103,8 +88,6 @@ public class ModItemsInteract implements Listener
                 Player target = list.get(new Random().nextInt(list.size()));
                 player.teleport(target.getLocation());
                 player.sendMessage(ChatColor.GREEN + "Vous avez été téléporté à " + ChatColor.YELLOW + target.getName());
-                if (time < timer.get(player)) return;
-                timer.put(player, System.currentTimeMillis() + 1000);
                 break;
             }
             /**

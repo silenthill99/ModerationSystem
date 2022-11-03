@@ -62,6 +62,9 @@ public class Mod implements CommandExecutor {
         player.getInventory().setItem(5, tpRandom);
         player.getInventory().setItem(6, vanish);
 
+        main.getConfig().set("items", invSee);
+        main.saveConfig();
+
         return false;
     }
 }

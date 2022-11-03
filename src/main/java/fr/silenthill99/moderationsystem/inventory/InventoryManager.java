@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -66,6 +67,12 @@ public class InventoryManager implements Listener
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         InventoryType.getValues().forEach((inv) -> inv.getInv().onInteract(e));
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEntityEvent event)
+    {
+        InventoryType.getValues().forEach((inv) -> inv.getInv().onInteractEntity(event));
     }
 
     @EventHandler
