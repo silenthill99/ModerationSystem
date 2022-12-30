@@ -1,9 +1,7 @@
 package fr.silenthill99.moderationsystem.inventory.hook;
 
 import fr.silenthill99.moderationsystem.inventory.AbstractInventory;
-import fr.silenthill99.moderationsystem.inventory.InventoryManager;
-import fr.silenthill99.moderationsystem.inventory.InventoryType;
-import fr.silenthill99.moderationsystem.inventory.holder.InventoryHolder;
+ import fr.silenthill99.moderationsystem.inventory.holder.InventoryHolder;
 import fr.silenthill99.moderationsystem.managers.PlayerManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -51,7 +49,7 @@ public class InventoryInv extends AbstractInventory<InventoryHolder>
 
         if (current.getType().equals(Material.PAPER))
         {
-            InventoryManager.openInventory(player, InventoryType.INVENTORY, target);
+            openInventory(player, target);
         }
     }
 }
