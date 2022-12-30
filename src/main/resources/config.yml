@@ -1,1 +1,5 @@
-items:
+database:
+  host: "sql2.minestrator.com"
+  database: "minesr_wqbxx3r0"
+  user: "minesr_wqbxx3r0"
+  password: "Bi2ZCKvX0SS9PaNg"
