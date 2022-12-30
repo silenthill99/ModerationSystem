@@ -118,4 +118,4 @@ run/
 !gradle-wrapper.jar
 gradle.properties
 serveur
-MySQL
+src/main/java/fr/silenthill99/moderationsystem/MySQL.java
