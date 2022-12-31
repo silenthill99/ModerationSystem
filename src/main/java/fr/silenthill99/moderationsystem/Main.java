@@ -2,12 +2,10 @@ package fr.silenthill99.moderationsystem;
 
 import fr.silenthill99.moderationsystem.commands.Mod;
 import fr.silenthill99.moderationsystem.commands.Report;
-import fr.silenthill99.moderationsystem.database.MySQL;
 import fr.silenthill99.moderationsystem.events.ModCancels;
 import fr.silenthill99.moderationsystem.events.ModItemsInteract;
 import fr.silenthill99.moderationsystem.inventory.InventoryManager;
 import fr.silenthill99.moderationsystem.managers.PlayerManager;
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,7 +31,6 @@ public final class Main extends JavaPlugin
         getLogger().info("Le plugin est opérationnel !");
         registers();
         commands();
-        initConnection();
     }
 
     @Override
@@ -58,24 +55,5 @@ public final class Main extends JavaPlugin
         pm.registerEvents(new ModItemsInteract(), this);
     }
 
-    private BasicDataSource connectionPool;
 
-    private void initConnection()
-    {
-        connectionPool = new BasicDataSource();
-        connectionPool.setDriverClassName("com.mysql.jdbc.Driver");
-        connectionPool.setUsername("minesr_wqbxx3r0");
-        connectionPool.setPassword("Bi2ZCKvX0SS9PaNg");
-        connectionPool.setUrl("jdbc:mysql://sql2.minestrator.com:3306/minesr_wqbxx3r0?autoReconnect=true");
-        connectionPool.setInitialSize(1);
-        connectionPool.setMaxTotal(10);
-        mysql = new MySQL(connectionPool);
-        mysql.createTables();
-    }
-    private MySQL mysql;
-
-    public MySQL getMysql()
-    {
-        return this.mysql;
-    }
 }

@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group = 'fr.silenthill99'
@@ -22,7 +23,6 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
-    implementation 'org.apache.commons:commons-dbcp2:2.0.1'
 }
 
 def targetJavaVersion = 8
